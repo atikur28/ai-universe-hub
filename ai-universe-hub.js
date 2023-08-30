@@ -1,15 +1,23 @@
-const loadFeatures = async () =>{
+const loadFeatures = async (seeMore) =>{
     const response = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const data = await response.json();
     const items = data.data.tools;
     // console.log(items);
-    displayItems(items);
+    displayItems(items, seeMore);
 }
 
-const displayItems = (items) =>{
+const displayItems = (items, seeMore) =>{
     const itemsContainer = document.getElementById(`items-container`);
     itemsContainer.textContent = '';
-    items = items.slice(0,6);
+    const seeMoreContainer = document.getElementById('see-more');
+    // console.log('Seeing', seeMore);
+    if(!seeMore){
+        items = items.slice(0,6);
+        seeMoreContainer.classList.remove('hidden');
+    }
+    else{
+        seeMoreContainer.classList.add('hidden');
+    }
     items.forEach(item =>{
         // console.log(item);
         const div = document.createElement(`div`);
@@ -28,7 +36,7 @@ const displayItems = (items) =>{
                 <p class="flex items-center justify-start gap-2"><img src="./images/frame.svg" /> ${item.published_in}
                 </div>
                 <div class="card-actions justify-end">
-                    <button class="btn bg-cyan-300">Detail</button>
+                    <button onclick="showDetails('${item.id}'); see_more_modal.showModal()" class="btn bg-cyan-300">Detail</button>
                 </div>
             </div>
         `;
@@ -37,9 +45,22 @@ const displayItems = (items) =>{
 }
 
 const seeMore = () =>{
-    
+    loadFeatures(true);
 }
 
+const showDetails = async (id) =>{
+    // console.log(id);
+    const response = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
+    const data = await response.json();
+    const details = data.data;
+    // console.log(data);
+    featureDetails(details);
+}
 
+const featureDetails = (details) =>{
+    console.log(details);
+    
+    see_more_modal.showModal();
+}
 
 loadFeatures();
