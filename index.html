@@ -64,21 +64,39 @@
              <div id="see-more" class="text-center my-6 hidden">
                 <button onclick="seeMore()" class="btn btn-error text-white">See More</button>
              </div>
+             <!-- Modal -->
+             <div class="w-11/12">
+                <dialog id="see_more_modal" class="modal">
+                <form method="dialog" class="modal-box w-11/12 max-w-5xl">
+                <div id="detail-info" class="mb-11 flex items-center justify-center gap-4">
+                  
+                </div>
+                <div class="modal-action">
+                  <button class="btn">Close</button>
+                </div>
+                </form>
+                </dialog>
+             </div>
         </section>
-
-           <!-- You can open the modal using ID.showModal() method -->
-            <dialog id="see_more_modal" class="modal">
-            <form method="dialog" class="modal-box">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            <div id="detail-info">
-                
-            </div>
-            </form>
-            </dialog>
-
     </main>
-    <footer>
-
+    <footer class="footer footer-center p-10 bg-gray-700 text-base-content rounded">
+      <div class="grid grid-flow-col gap-4">
+        <a class="link link-hover text-white">About us</a> 
+        <a class="link link-hover text-white">Contact</a> 
+        <a class="link link-hover text-white">Jobs</a> 
+        <a class="link link-hover text-white">Press kit</a>
+      </div> 
+      <div>
+        <div class="grid grid-flow-col gap-4">
+          <a><img src="./images/facebook.svg" alt=""></a> 
+          <a><img src="./images/instagram.svg" alt=""></a> 
+          <a><img src="./images/twitter.svg" alt=""></a>
+          <a><img src="./images/youtube.svg" alt=""></a>
+        </div>
+      </div> 
+      <div>
+        <p class="text-white">Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+      </div>
     </footer>
 
     <script src="./ai-universe-hub.js"></script>

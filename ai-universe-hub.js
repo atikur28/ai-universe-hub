@@ -36,7 +36,7 @@ const displayItems = (items, seeMore) =>{
                 <p class="flex items-center justify-start gap-2"><img src="./images/frame.svg" /> ${item.published_in}
                 </div>
                 <div class="card-actions justify-end">
-                    <button onclick="showDetails('${item.id}'); see_more_modal.showModal()" class="btn bg-cyan-300">Detail</button>
+                    <button onclick="showDetails('${item.id}'); see_more_modal.showModal();" class="btn bg-cyan-300">Detail</button>
                 </div>
             </div>
         `;
@@ -59,8 +59,46 @@ const showDetails = async (id) =>{
 
 const featureDetails = (details) =>{
     console.log(details);
-    
-    see_more_modal.showModal();
+    const detailInfo = document.getElementById(`detail-info`);
+    detailInfo.innerHTML = `
+    <div class="bg-rose-50 w-fit rounded-lg border-2 border-pink-300">
+        <h3 class="text-xl font-bold w-96 px-7 py-7">${details.description}</h3>
+        <div class="flex items-center justify-center gap-4 px-5 mb-5">
+          <div class="flex flex-col items-center justify-center bg-white rounded-lg text-center px-5 h-28 w-28">
+            <span class="text-green-500 font-bold">${details.pricing[0].price}</span><br>
+            <span class="text-green-500 font-bold">${details.pricing[0].plan}</span>
+          </div>
+          <div class="flex flex-col items-center justify-center bg-white rounded-lg text-center px-5 h-28 w-28">
+            <span class="text-orange-500 font-bold">${details.pricing[1].price}</span><br>
+            <span class="text-orange-500 font-bold">${details.pricing[1].plan}</span>
+          </div>
+          <div class="flex flex-col items-center justify-center bg-white rounded-lg text-center px-5 h-28 w-28">
+            <span class="text-red-500 font-bold">Contact us Enterprise</span>
+          </div>
+        </div>
+        <div class="px-7 flex items-start justify-between gap-8 mb-8">
+          <div class="w-max">
+            <h3 class="text-xl font-bold">Features</h3>
+            <li class="w-max">'${details.features[1].feature_name ? details.features[1].feature_name : 'No data Found'}'</li>
+            <li class="w-max">'${details.features[2].feature_name ? details.features[1].feature_name : 'No data Found'}'</li>
+            <li class="w-max">'${details.features[3].feature_name ? details.features[1].feature_name : 'No data Found'}'</li>
+          </div>
+          <div class="w-max">
+            <h3 class="text-xl font-bold">Integrations</h3>
+            <li class="w-max">${details.integrations[0] ? details.integrations[0] : 'No data Found'}</li>
+            <li class="w-max">${details.integrations[1] ? details.integrations[1] : 'No data Found'}</li>
+            <li class="w-max">${details.integrations[2] ? details.integrations[2] : 'No data Found'}</li>
+          </div>
+        </div>
+    </div>
+    <div class="w-fit rounded-lg border-2">
+      <div class="text-center m-6">
+        <img class="rounded-lg" src="${details?.image_link[0] || details.image_link[1]}" alt="">
+      </div>
+      <h3 class="text-center font-bold text-xl">${details.input_output_examples[0].input || details.input_output_examples[1].input}</h3>
+      <p class="text-center w-4/5 mx-auto m-5">${details.input_output_examples[0].output || details.input_output_examples[1].output}</p>
+    </div>
+    `;
 }
 
 loadFeatures();
